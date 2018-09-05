@@ -3,14 +3,14 @@
 
 
 ### JVM-SANDBOX用户手册
-'''
+```
 https://github.com/alibaba/jvm-sandbox/wiki/USER-GUIDE
 
-'''
+```
 
 
 ### 使用手册
-'''
+```
 查看class类下对应的方法,暂时不支持静态方法
 ./sandbox.sh -p 18982 -d "debug-watch/watch?class=com.ruijie.cvm.task.service.impl.ThriftTaskServiceImpl&method=delImageTask"
 
@@ -26,6 +26,6 @@ https://github.com/alibaba/jvm-sandbox/wiki/USER-GUIDE
 -m：查看模块详细信息
 ./sandbox.sh -p 18982 -m "debug-watch"
 
-'''
+```
 
 
