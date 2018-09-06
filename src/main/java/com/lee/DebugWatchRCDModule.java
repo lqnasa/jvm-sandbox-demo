@@ -29,7 +29,7 @@ public class DebugWatchRCDModule implements Module {
     @Resource
     private ModuleEventWatcher moduleEventWatcher;
 
-    private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    private static Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
 
     @Http("/watch")
     public void watch(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
@@ -38,7 +38,6 @@ public class DebugWatchRCDModule implements Module {
         final List<Trigger> triggers = Arrays.asList(Trigger.BEFORE, Trigger.RETURN, Trigger.THROWS);
         final Printer printer = new ConcurrentLinkedQueuePrinter(resp.getWriter());
         debugWatch(cnPattern, mnPattern, triggers, printer);
-
     }
 
     private void debugWatch(final String cnPattern, final String mnPattern, final List<Trigger> triggers,
