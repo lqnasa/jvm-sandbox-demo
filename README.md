@@ -11,7 +11,7 @@ https://github.com/alibaba/jvm-sandbox/wiki/USER-GUIDE
 
 ### 使用手册
 ```
-查看class类下对应的方法,暂时不支持静态方法
+查看class类下对应的方法
 ./sandbox.sh -p 18982 -d "debug-watch/watch?class=com.ruijie.cvm.task.service.impl.ThriftTaskServiceImpl&method=delImageTask"
 
 查看 sandbox启动模块情况
