@@ -14,7 +14,7 @@ public class DynamicClassTransformer implements ClassFileTransformer {
             ProtectionDomain protectionDomain, byte[] classfileBuffer) throws IllegalClassFormatException {
 
         try {
-            CtClass ctClass = ClassPool.getDefault().get("com.alibaba.study.thread.HelloServiceImpl");
+            CtClass ctClass = ClassPool.getDefault().get("com.lee.attach.HelloServiceImpl");
             String methodName = "sayHello";
             CtMethod ctMethod = ctClass.getDeclaredMethod(methodName);
             System.out.println(ctMethod.getName());

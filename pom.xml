@@ -54,14 +54,14 @@
 			<artifactId>gson</artifactId>
 			<version>2.8.5</version>
 		</dependency>
-		
-	<!-- 	<dependency>
+
+		<dependency>
 			<groupId>com.sun</groupId>
 			<artifactId>tools</artifactId>
 			<version>1.8</version>
 			<scope>system</scope>
 			<systemPath>${JAVA_HOME}/lib/tools.jar</systemPath>
-		</dependency> -->
+		</dependency>
 
 
 	</dependencies>
@@ -75,6 +75,45 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.3.2</version>
+				<!-- <configuration> <archive> <index>true</index> <manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile> 
+					<manifest> <addDefaultImplementationEntries /> </manifest> </archive> </configuration> -->
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<artifactSet>
+						<includes>
+							<!-- <include>javassist:javassist:jar:</include> <include>net.bytebuddy:byte-buddy:jar:</include> 
+								<include>net.bytebuddy:byte-buddy-agent:jar:</include> -->
+							<include>com.jcraft:jsch:jar:</include>
+							<include>org.postgresql:postgresql:jar:</include>
+						</includes>
+					</artifactSet>
+					<transformers>
+						<transformer
+							implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+							<manifestEntries>
+								<Premain-Class>com.lee.attach.MyAgent</Premain-Class>
+							</manifestEntries>
+						</transformer>
+					</transformers>
+				</configuration>
+			</plugin>
+
 		</plugins>
 	</build>
 </project>
