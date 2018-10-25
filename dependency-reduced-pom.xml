@@ -95,6 +95,12 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
+      <groupId>org.fusesource.jansi</groupId>
+      <artifactId>jansi</artifactId>
+      <version>1.17.1</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
       <groupId>com.alibaba.jvm.sandbox</groupId>
       <artifactId>sandbox-api</artifactId>
       <version>1.0.15</version>
@@ -125,3 +131,4 @@
     </dependency>
   </dependencies>
 </project>
+

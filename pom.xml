@@ -56,6 +56,12 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.fusesource.jansi</groupId>
+			<artifactId>jansi</artifactId>
+			<version>1.17.1</version>
+		</dependency>
+
+		<dependency>
 			<groupId>com.sun</groupId>
 			<artifactId>tools</artifactId>
 			<version>1.8</version>
@@ -113,7 +119,6 @@
 					</transformers>
 				</configuration>
 			</plugin>
-
 		</plugins>
 	</build>
 </project>

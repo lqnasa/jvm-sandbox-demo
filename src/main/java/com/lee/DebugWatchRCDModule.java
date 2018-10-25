@@ -1,5 +1,7 @@
 package com.lee;
 
+import static org.fusesource.jansi.Ansi.ansi;
+
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -67,23 +69,23 @@ public class DebugWatchRCDModule implements Module {
 						public void afterReturning(final Advice advice) {
 							printer.print(String.format(
 									"=============================== 监听 【%s】方法  start ============================\n",
-									advice.getBehavior().getName()));
+									ansi().fgBrightGreen().a(advice.getBehavior().getName()).reset()));
 							String returnObj = gson.toJson(advice.getReturnObj());
 							printlnByExpress(binding(advice).bind("【返回值】", returnObj));
 							printer.print(String.format(
 									"=============================== 监听 【%s】方法  end ============================\n\n\n",
-									advice.getBehavior().getName()));
+									ansi().fgBrightGreen().a(advice.getBehavior().getName()).reset()));
 						}
 
 						@Override
 						public void afterThrowing(final Advice advice) {
 							printer.print(String.format(
 									"=============================== 监听 【%s】方法异常 start ============================\n",
-									advice.getBehavior().getName()));
-							printlnByExpress(binding(advice).bind("【异常】", advice.getThrowable()));
+									ansi().fgBrightRed().a(advice.getBehavior().getName()).reset()));
+							printlnByExpress(binding(advice).bind("【异常】", ansi().bgRed().a(advice.getThrowable())));
 							printer.print(String.format(
 									"=============================== 监听 【%s】方法异常  end ============================\n\n\n",
-									advice.getBehavior().getName()));
+									ansi().fgBrightRed().a(advice.getBehavior().getName()).reset()));
 						}
 
 						private Bind binding(Advice advice) {
