@@ -26,6 +26,10 @@ https://github.com/alibaba/jvm-sandbox/wiki/USER-GUIDE
 -m：查看模块详细信息
 ./sandbox.sh -p 18982 -m "debug-watch"
 
+-S : 关闭jvm-sandbox 服务
+./sandbox.sh -p 18982 -S
+
+
 ```
 
 
