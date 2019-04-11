@@ -3,7 +3,7 @@ package com.lee.attach;
 public class Client {
 
     /**
-     * @param args
+     *@param args
      */
     public static void main(String[] args) {
         HelloServiceImpl service = new HelloServiceImpl();

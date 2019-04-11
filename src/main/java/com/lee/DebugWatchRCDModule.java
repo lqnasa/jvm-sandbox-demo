@@ -3,6 +3,7 @@ package com.lee;
 import static org.fusesource.jansi.Ansi.ansi;
 
 import java.io.IOException;
+import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -34,7 +35,11 @@ public class DebugWatchRCDModule implements Module {
 	@Resource
 	private ModuleEventWatcher moduleEventWatcher;
 
-	private static final Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
+	private static final Gson GSON = new GsonBuilder()
+    		.excludeFieldsWithModifiers(Modifier.ABSTRACT,Modifier.NATIVE,Modifier.TRANSIENT,Modifier.VOLATILE,
+    				Modifier.INTERFACE,Modifier.STATIC,Modifier.STRICT,Modifier.SYNCHRONIZED,Modifier.FINAL)
+    		.disableHtmlEscaping().setPrettyPrinting().create();
+
 
 	@Http("/watch")
 	public void watch(final HttpServletRequest req, final HttpServletResponse resp) throws IOException {
@@ -70,7 +75,7 @@ public class DebugWatchRCDModule implements Module {
 							printer.print(String.format(
 									"=============================== 监听 【%s】方法  start ============================\n",
 									ansi().fgBrightGreen().a(advice.getBehavior().getName()).reset()));
-							String returnObj = gson.toJson(advice.getReturnObj());
+							String returnObj = GSON.toJson(advice.getReturnObj());
 							printlnByExpress(binding(advice).bind("【返回值】", returnObj));
 							printer.print(String.format(
 									"=============================== 监听 【%s】方法  end ============================\n\n\n",
@@ -89,7 +94,7 @@ public class DebugWatchRCDModule implements Module {
 						}
 
 						private Bind binding(Advice advice) {
-							String parameterArray = gson.toJson(advice.getParameterArray());
+							String parameterArray = GSON.toJson(advice.getParameterArray());
 							return new Bind().bind("【类】", advice.getBehavior().getDeclaringClass())
 									.bind("【方法】", advice.getBehavior().getName()).bind("【参数值】", parameterArray);
 						}
