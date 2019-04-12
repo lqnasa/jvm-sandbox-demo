@@ -7,7 +7,7 @@ import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map.Entry;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -100,9 +100,15 @@ public class DebugWatchRCDModule implements Module {
 						}
 
 						private void printlnByExpress(final Bind bind) {
-							String watchObjectStr = bind.entrySet().stream()
-									.map(obj -> obj.getKey() + "：" + obj.getValue()+"\n").collect(Collectors.joining("\n"));
-							printer.println(watchObjectStr);
+							/*String watchObjectStr = bind.entrySet().stream()
+									.map(obj -> obj.getKey() + "：" + obj.getValue()+"\n").collect(Collectors.joining("\n"));*/
+							StringBuilder sb = new StringBuilder();
+							for (Entry<String, Object> entry : bind.entrySet()) {
+								sb.append(entry.getKey()).append("：").append(entry.getValue()).append("\n")
+										.append("\n");
+							}
+							sb.substring(0, sb.length() - 2);
+							printer.println(sb.toString());
 						}
 
 					});
